@@ -1,4 +1,4 @@
-@(gpform: Form[models.Father])(implicit request: RequestHeader)
+@(faform: Form[models.Father])(implicit request: RequestHeader)
 
 @import helper._
 
@@ -9,13 +9,16 @@
      
     <ul>
     	<li>
-    		@helper.inputText(gpform("id"))
+    		@inputText(faform("id"))
     	</li>
     	<li>
-    		@helper.inputText(gpform("name"))
+    		@inputText(faform("name"))
     	</li>
     	<li>
-    		@helper.inputText(gpform("sons"))
+    		@inputText(faform("gp"))
+    	</li>
+    	<li>
+    		@inputText(faform("sons"))
     	</li>
     	<li>
     		<label>Remove element</label>

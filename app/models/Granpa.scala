@@ -83,16 +83,16 @@ object GranPa extends PersistanceCompanion[GranPa] with DirectRefPersistanceComp
     	findOneById(id).get.sons
     val news =
     	obj.sons
-    	
+
     for (
-        o <- olds;
-        n <- news
-        ) {
-    	if (!news.exists(x => x.id==o.id)) //delete old
+        o <- olds)
+    if (!news.exists(x => x.id==o.id)) //delete old
     	  Father.referenceChanged(None,o)
-    	else if (!olds.exists(x => x.id == n.id)) //add new
-    	  Father.referenceChanged(Some(Reference(id)),o)
-    }
+    for (
+        n <- news)
+    if (!olds.exists(x => x.id == n.id)) //add new 
+    	Father.referenceChanged(Some(Reference(id)),n)
+   
     super.update(id,obj)
   }
 }

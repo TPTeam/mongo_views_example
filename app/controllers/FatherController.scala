@@ -3,6 +3,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 import models._
+import RefObj._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.concurrent.Akka
@@ -25,8 +26,8 @@ object FatherController extends Controller with TablePager[Father] with CRUDer[F
   
   val singleton = Father
   
-  def elemValues(gp: Father) =
-    Seq(gp.id.toStringMongod(),gp.name)
+  def elemValues(fa: Father) =
+    Seq(fa.id.toStringMongod(),fa.name)
     
   override val elemsToDisplay = 
     Seq("id","name")
@@ -39,9 +40,11 @@ object FatherController extends Controller with TablePager[Father] with CRUDer[F
       mapping(
         "id" -> text,
         "name" -> nonEmptyText,
+        "gp" -> text,
         "sons" -> text.verifyOptJson
-       ){(id, name, _sons) =>
+       ){(id, name,gp, _sons) =>
           {
+            val granpa = tryo{makeReference[GranPa](GranPa.findOneByIdString(gp).get)}
             val sons: List[Reference[Son]] = List()
             				
             (tryo(new ObjectId(id))) match {
@@ -50,6 +53,7 @@ object FatherController extends Controller with TablePager[Father] with CRUDer[F
             		      Father(
             		          id = oid,
             		          name = name,
+            		          gp = granpa,
             		          sons = sons
             		      )
             		   )
@@ -58,14 +62,16 @@ object FatherController extends Controller with TablePager[Father] with CRUDer[F
             		  Father.create(
             		      Father(
             		          name = name,
+            		          gp = granpa,
             		          sons = sons
             		          )
             		      )
             }
           }
-      }{gp => {
-        Some(gp.id.toStringMongod(), 
-    		 gp.name,
+      }{f => {
+        Some(f.id.toStringMongod(), 
+    		 f.name,
+    		 f.gp.map(x => x.id.toStringMongod()).getOrElse(""),
     		 ""//Json.stringify("")
     		)
       }

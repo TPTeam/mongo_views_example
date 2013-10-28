@@ -3,6 +3,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 import models._
+import RefObj._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.concurrent.Akka
@@ -42,7 +43,13 @@ object GranpaController extends Controller with TablePager[GranPa] with CRUDer[G
         "sons" -> text.verifyOptJson
        ){(id, name, _sons) =>
           {
-            val sons: List[Reference[Father]] = List()
+            val sons: List[Reference[Father]] = 
+              tryo{Json.parse(_sons)} match {
+                case Some(s : JsArray) =>
+                  s.value.seq.map(v =>
+                    tryo{makeReference[Father](Father.findOneByIdString(v.as[String]).get)}).toList.flatten
+                case _ => List()
+              }
             				
             (tryo(new ObjectId(id))) match {
               case Some(oid) => 			//UPDATE
@@ -66,7 +73,7 @@ object GranpaController extends Controller with TablePager[GranPa] with CRUDer[G
       }{gp => {
         Some(gp.id.toStringMongod(), 
     		 gp.name,
-    		 ""//Json.stringify("")
+    		 Json.stringify(Json.toJson(gp.sons.map(s => s.id.toStringMongod)))
     		)
       }
       }

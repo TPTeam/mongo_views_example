@@ -22,7 +22,7 @@ case class Father (
   
   val singleton: PersistanceCompanion[Father] = x
   
-  def updateGranpa(rgp: Option[Reference[GranPa]]) =
+  def updateGranpa(rgp: Option[Reference[GranPa]]) = {
     singleton.update(this.id,
         Father(
             this.id,
@@ -30,7 +30,8 @@ case class Father (
             rgp,
             this.sons
             )
-        )    
+        )
+  }
 }
 
 object Father extends PersistanceCompanion[Father] 
@@ -39,10 +40,7 @@ object Father extends PersistanceCompanion[Father]
   val collectionName = "fathers"
     
   def removeFrom(toBeRemoved: List[Reference[Son]], from: List[Father]): Unit = {
-    def _update(id: ObjectId, obj: Father) = {
-    	super.update(id,obj)
-    }
-    
+     
     val dup = 
       for (
           fa <- from          
@@ -63,10 +61,11 @@ object Father extends PersistanceCompanion[Father]
       }
   }
   
-  def addTo(toBeAdded: List[Reference[Son]], to: Father): Unit = {
-    def _update(id: ObjectId, obj: Father) = {
+  def _update(id: ObjectId, obj: Father) = {
     	super.update(id,obj)
     }
+  
+  def addTo(toBeAdded: List[Reference[Son]], to: Father): Unit = {
     
     _update(to.id,
             Father(
@@ -83,9 +82,9 @@ object Father extends PersistanceCompanion[Father]
       case None => //Delete
         delete(rel.id)
       case Some(gp) => //Update or nothing
-        findOneById(rel.id).map(x =>
+        findOneById(rel.id).map(x => {
         	x.updateGranpa(Some(gp))
-        )   
+        })   
     } 
   }
   
