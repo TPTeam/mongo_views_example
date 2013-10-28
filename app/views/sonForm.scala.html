@@ -1,0 +1,28 @@
+@(gpform: Form[models.Son])(implicit request: RequestHeader)
+
+@import helper._
+
+@helper.form(action = routes.SonController.submit) {
+	
+     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+     <div class="centered form">
+     
+	    <ul>
+	    	<li>
+	    		@helper.inputText(gpform("id"))
+	    	</li>
+	    	<li>
+	    		@helper.inputText(gpform("name"))
+	    	</li>
+	    	<li>
+	    		<label>Remove element</label>
+	    		<input type="checkbox" name="remove" />
+	    	</li>
+	    </ul>
+	    
+	    <input type="submit" />
+	    
+    </div>
+    
+}
