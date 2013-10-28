@@ -3,39 +3,40 @@
 @main("GranPa - Page") {
 	
 	<div class="centered">
-	<ul class="menu">
-		 <li>
-		    <a href="/granpa">Granpa</a>
-		 </li>
-		 <li>
-		    <a href="/father">Father</a>
-		 </li>
-		 <li>
-			<a href="/son">Son</a>
-		</li>
-	</ul>
-	
-	<div>
-		 <ul>
-	    	<li>
-				<a href="/granpa/new">
-					<h3>Create New</h3>
-				</a>
+		<ul class="menu">
+			 <li>
+			    <a href="/granpa">Granpa</a>
+			 </li>
+			 <li>
+			    <a href="/father">Father</a>
+			 </li>
+			 <li>
+				<a href="/son">Son</a>
 			</li>
-		</ul>					
+		</ul>
+		
+		<div>
+			 <ul>
+		    	<li>
+					<a href="/granpa/new">
+						<h3>Create New</h3>
+					</a>
+				</li>
+			</ul>					
+		</div>
+		
+		<table id="granpa_table">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		</table>
+		
 	</div>
-	
-	<table id="granpa_table">
-	<thead>
-		<tr>
-			<th>id</th>
-			<th>name</th>
-		</tr>
-	</thead>
-	<tbody></tbody>
-	</table>
-	
-	</div>
+
 	<script>
 		$(document).ready(function() {
 
