@@ -15,24 +15,24 @@ import play.api.libs.concurrent.Execution.Implicits._
 import controllerhelper._
 import tp_utils.Tryer._
 
-object GranpaController extends Controller with TablePager[GranPa] with CRUDer[GranPa] {  
+object SonController extends Controller with TablePager[Son] with CRUDer[Son] {  
   
   def index = 
     Action {	
 	  implicit request =>
-	  	Ok(views.html.granPaPage())
+	  	Ok(views.html.sonPage())
   	}
   
-  val singleton = GranPa
+  val singleton = Son
   
-  def elemValues(gp: GranPa) =
+  def elemValues(gp: Son) =
     Seq(gp.id.toStringMongod(),gp.name)
     
-  override val elemsToDisplay = 
+   override val elemsToDisplay = 
     Seq("id","name")
     
-  def formTemplate(formgp: Form[GranPa])(implicit request: RequestHeader): play.api.templates.Html =
-    views.html.granPaForm(formgp)
+  def formTemplate(formgp: Form[Son])(implicit request: RequestHeader): play.api.templates.Html =
+    views.html.sonForm(formgp)
     
   def form =
     Form(
@@ -42,23 +42,23 @@ object GranpaController extends Controller with TablePager[GranPa] with CRUDer[G
         "sons" -> text.verifyOptJson
        ){(id, name, _sons) =>
           {
-            val sons: List[Reference[Father]] = List()
+            val sons: List[Reference[Son]] = List()
             				
             (tryo(new ObjectId(id))) match {
               case Some(oid) => 			//UPDATE
-                	  GranPa.update(oid,
-            		      GranPa(
+                	  Son.update(oid,
+            		      Son(
             		          id = oid,
-            		          name = name,
-            		          sons = sons
+            		          name = name
+            		          //sons = sons
             		      )
             		   )
-            		   GranPa.findOneById(oid).get
+            		   Son.findOneById(oid).get
               case _ =>						//CREATE
-            		  GranPa.create(
-            		      GranPa(
-            		          name = name,
-            		          sons = sons
+            		  Son.create(
+            		      Son(
+            		          name = name
+            		          //sons = sons
             		          )
             		      )
             }

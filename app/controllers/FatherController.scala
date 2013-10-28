@@ -15,24 +15,24 @@ import play.api.libs.concurrent.Execution.Implicits._
 import controllerhelper._
 import tp_utils.Tryer._
 
-object GranpaController extends Controller with TablePager[GranPa] with CRUDer[GranPa] {  
+object FatherController extends Controller with TablePager[Father] with CRUDer[Father] {  
   
   def index = 
     Action {	
 	  implicit request =>
-	  	Ok(views.html.granPaPage())
+	  	Ok(views.html.fatherPage())
   	}
   
-  val singleton = GranPa
+  val singleton = Father
   
-  def elemValues(gp: GranPa) =
+  def elemValues(gp: Father) =
     Seq(gp.id.toStringMongod(),gp.name)
     
   override val elemsToDisplay = 
     Seq("id","name")
     
-  def formTemplate(formgp: Form[GranPa])(implicit request: RequestHeader): play.api.templates.Html =
-    views.html.granPaForm(formgp)
+  def formTemplate(formgp: Form[Father])(implicit request: RequestHeader): play.api.templates.Html =
+    views.html.fatherForm(formgp)
     
   def form =
     Form(
@@ -42,21 +42,21 @@ object GranpaController extends Controller with TablePager[GranPa] with CRUDer[G
         "sons" -> text.verifyOptJson
        ){(id, name, _sons) =>
           {
-            val sons: List[Reference[Father]] = List()
+            val sons: List[Reference[Son]] = List()
             				
             (tryo(new ObjectId(id))) match {
               case Some(oid) => 			//UPDATE
-                	  GranPa.update(oid,
-            		      GranPa(
+                	  Father.update(oid,
+            		      Father(
             		          id = oid,
             		          name = name,
             		          sons = sons
             		      )
             		   )
-            		   GranPa.findOneById(oid).get
+            		   Father.findOneById(oid).get
               case _ =>						//CREATE
-            		  GranPa.create(
-            		      GranPa(
+            		  Father.create(
+            		      Father(
             		          name = name,
             		          sons = sons
             		          )

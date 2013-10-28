@@ -1,9 +1,9 @@
 @()
 
-@main("GranPa - Page") {
+@main("Son - Page") {
 	
 	<div class="centered">
-	<ul class="menu">
+	 <ul class="menu">
 		 <li>
 		    <a href="/granpa">Granpa</a>
 		 </li>
@@ -18,14 +18,14 @@
 	<div>
 		 <ul>
 	    	<li>
-				<a href="/granpa/new">
+				<a href="/son/new">
 					<h3>Create New</h3>
 				</a>
 			</li>
 		</ul>					
 	</div>
 	
-	<table id="granpa_table">
+	<table id="son_table">
 	<thead>
 		<tr>
 			<th>id</th>
@@ -38,11 +38,12 @@
 	</div>
 	</div>
 	<script>
+		
 		$(document).ready(function() {
 
 			//Using dataTable (jQuery plugin: http://datatables.net/)
 
-			oTable = $("#granpa_table").dataTable({
+			oTable = $("#son_table").dataTable({
 
 				"iDisplayLength" : 20,
 				"bProcessing" : true,
@@ -55,7 +56,7 @@
 				"bServerSide" : true,
 				"bJQueryUI" : true,
 				"bRetrieve" : true,
-				"sAjaxSource" : "/granpa/table",
+				"sAjaxSource" : "/son/table",
 				"aoColumnDefs" : [ {
 					"bSearchable" : false,
 					"bVisible" : false,
@@ -68,6 +69,7 @@
 			});
 
 		})
+	
 	</script>
 	
 }

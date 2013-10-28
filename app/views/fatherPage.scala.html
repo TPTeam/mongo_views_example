@@ -1,7 +1,6 @@
 @()
 
-@main("GranPa - Page") {
-	
+@main("Father - Page") {
 	<div class="centered">
 	<ul class="menu">
 		 <li>
@@ -18,14 +17,14 @@
 	<div>
 		 <ul>
 	    	<li>
-				<a href="/granpa/new">
+				<a href="/father/new">
 					<h3>Create New</h3>
 				</a>
 			</li>
 		</ul>					
 	</div>
 	
-	<table id="granpa_table">
+	<table id="father_table">
 	<thead>
 		<tr>
 			<th>id</th>
@@ -42,7 +41,7 @@
 
 			//Using dataTable (jQuery plugin: http://datatables.net/)
 
-			oTable = $("#granpa_table").dataTable({
+			oTable = $("#father_table").dataTable({
 
 				"iDisplayLength" : 20,
 				"bProcessing" : true,
@@ -55,7 +54,7 @@
 				"bServerSide" : true,
 				"bJQueryUI" : true,
 				"bRetrieve" : true,
-				"sAjaxSource" : "/granpa/table",
+				"sAjaxSource" : "/father/table",
 				"aoColumnDefs" : [ {
 					"bSearchable" : false,
 					"bVisible" : false,
