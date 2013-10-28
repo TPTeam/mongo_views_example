@@ -36,12 +36,11 @@
 	</table>
 	
 	</div>
-	</div>
 	<script>
 		$(document).ready(function() {
 
 			//Using dataTable (jQuery plugin: http://datatables.net/)
-
+			
 			oTable = $("#granpa_table").dataTable({
 
 				"iDisplayLength" : 20,
@@ -49,13 +48,13 @@
 				"bAutoWidth" : false,
 				"aaSorting" : [ [ 1, "asc" ] ],
 				"fnRowCallback" : function(nRow, aData, iDisplayIndex) {
-					$('td:eq(0)', nRow).html('<a href="/father/edit/' + aData[0] + '">' + aData[1] + '</a>');
+					$('td:eq(0)', nRow).html('<a href="@routes.GranpaController.edit("")' + aData[0] + '">' + aData[1] + '</a>');
 					return nRow;
 				},
 				"bServerSide" : true,
 				"bJQueryUI" : true,
 				"bRetrieve" : true,
-				"sAjaxSource" : "/granpa/table",
+				"sAjaxSource" : "@routes.GranpaController.table()",
 				"aoColumnDefs" : [ {
 					"bSearchable" : false,
 					"bVisible" : false,

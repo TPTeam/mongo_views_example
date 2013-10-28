@@ -35,7 +35,7 @@
 	</table>
 	
 	</div>
-	</div>
+	
 	<script>
 		$(document).ready(function() {
 
@@ -48,13 +48,13 @@
 				"bAutoWidth" : false,
 				"aaSorting" : [ [ 1, "asc" ] ],
 				"fnRowCallback" : function(nRow, aData, iDisplayIndex) {
-					$('td:eq(0)', nRow).html('<a href="/father/edit/' + aData[0] + '">' + aData[1] + '</a>');
+					$('td:eq(0)', nRow).html('<a href="@routes.FatherController.edit("")' + aData[0] + '">' + aData[1] + '</a>');
 					return nRow;
 				},
 				"bServerSide" : true,
 				"bJQueryUI" : true,
 				"bRetrieve" : true,
-				"sAjaxSource" : "/father/table",
+				"sAjaxSource" : "@routes.FatherController.table()",
 				"aoColumnDefs" : [ {
 					"bSearchable" : false,
 					"bVisible" : false,
