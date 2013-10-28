@@ -28,6 +28,9 @@ object GranpaController extends Controller with TablePager[GranPa] with CRUDer[G
   def elemValues(gp: GranPa) =
     Seq(gp.id.toStringMongod(),gp.name)
     
+  override val elemsToDisplay = 
+    Seq("id","name")
+    
   def formTemplate(formgp: Form[GranPa])(implicit request: RequestHeader): play.api.templates.Html =
     views.html.granPaForm(formgp)
     

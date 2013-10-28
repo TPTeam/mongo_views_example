@@ -2,6 +2,19 @@
 
 @main("Son - Page") {
 	
+	<div class="centered">
+	 <ul class="menu">
+		 <li>
+		    <a href="/granpa">Granpa</a>
+		 </li>
+		 <li>
+		    <a href="/father">Father</a>
+		 </li>
+		 <li>
+			<a href="/son">Son</a>
+		</li>
+	</ul>
+	
 	<div>
 		 <ul>
 	    	<li>
@@ -23,18 +36,23 @@
 	</table>
 	
 	</div>
+	</div>
 	<script>
+		
 		$(document).ready(function() {
 
 			//Using dataTable (jQuery plugin: http://datatables.net/)
 
 			oTable = $("#son_table").dataTable({
-				
+
 				"iDisplayLength" : 20,
 				"bProcessing" : true,
 				"bAutoWidth" : false,
 				"aaSorting" : [ [ 1, "asc" ] ],
-				"aoColumns": [{"bVisible": true},null],
+				"fnRowCallback" : function(nRow, aData, iDisplayIndex) {
+					$('td:eq(0)', nRow).html('<a href="/father/edit/' + aData[0] + '">' + aData[1] + '</a>');
+					return nRow;
+				},
 				"bServerSide" : true,
 				"bJQueryUI" : true,
 				"bRetrieve" : true,
@@ -51,6 +69,7 @@
 			});
 
 		})
+	
 	</script>
 	
 }

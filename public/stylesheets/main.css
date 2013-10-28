@@ -17,16 +17,28 @@ body {
 	background: -o-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
 	background: -ms-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
 	background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(             startColorstr='#eeeeee',
+	filter: progid:DXImageTransform.Microsoft.gradient(                  startColorstr='#eeeeee',
 		endColorstr='#cccccc', GradientType=0);
 	height: 100%;
 }
 
 ul {
 	display: block;
-	display: block;
 	margin: 0;
 	-webkit-padding-start: 0;
+}
+
+ul.menu {
+	width: 100%;
+	height: 8%;
+	margin: 0;
+	-webkit-padding-start: 0;
+	display: inline-block;
+	background: whitesmoke;
+}
+
+ul.menu li:last {
+	margin-right: 2.5%;
 }
 
 li {
@@ -37,11 +49,28 @@ li {
 	background: whitesmoke;
 }
 
+ul.menu li {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	width: 30%;
+	margin-left: 2.5%;
+	padding-top: 2%;
+}
+
 a {
 	color: #F57C2B;
 	font-weight: bold;
 	text-decoration: initial;
 	font-size: 1.2em;
+}
+
+td a {
+	color: #F35252;
+	font-weight: normal;
+	font-size: 1em;
 }
 
 li:hover {
@@ -73,8 +102,12 @@ dt {
 
 .centered {
 	margin: auto;
-	padding-top: 6%;
 	height: 90%;
+	width: 76%;
+}
+
+.centered.main {
+	padding-top: 6%;
 	width: 70%;
 }
 
@@ -94,4 +127,18 @@ input[type="submit"] {
 
 .granpa_table_wrapper {
 	margin-top: 4%;
+}
+
+table.dataTable tr.even td.sorting_1 {
+	background-color: #E8E9D7;
+}
+
+table.dataTable tr.odd td.sorting_1 {
+	background-color: #D8E9D7;
+}
+
+.dataTables_wrapper {
+	position: relative;
+	margin-top: 4%;
+	clear: both;
 }
