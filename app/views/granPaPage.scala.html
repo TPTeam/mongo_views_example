@@ -1,0 +1,97 @@
+@()
+
+@main("GranPa - Page") {
+	
+	<div>
+	<a href="/granpa/new">
+		<h3>Create New</h3>
+	</a>			
+	</div>
+	
+	<div>
+	
+	<table id="granpa_table">
+	<thead>
+		<tr>
+			<th></th>
+			<!-- headers here -->
+		</tr>
+	</thead>
+	<tbody></tbody>
+	</table>
+	
+	</div>
+	<script>
+
+	$(function() {
+		console.log("ok da qui andiamo..");
+		console.log("DATATABLE: ", url);
+		$.get(url + "?init=true", function(data) {
+			var headers = [];
+			var th;
+			for ( var h = 0, hL = data.headers.length; h < hL; h += 1) {
+				th = $('<th></th>').text(data.headers[h]);
+				headers.push(th);
+			}
+			$(tableId).find('thead tr').append(headers);
+
+			var iDisplayLength = Math.floor($(parent).height() / 18) || 1;
+
+			oTable = $(tableId).dataTable(
+					{
+						"sDom" : data.sDom,
+						"sPaginationType" : data.paginationType,
+						"iDisplayLength" : iDisplayLength,
+						"fnDrawCallback" : function() {
+							$(tableId).find('tbody tr').addClass('leap_focusable');
+							LP_Manager.get().addAllFocusable();
+						},
+						"fnInitComplete" : function(s, j) {
+
+							// resize table
+							var parent = $(tableId + '_wrapper').parent();
+							var a = $(tableId).dataTable();
+							var b = a.fnSettings();
+
+							// append toolbar
+							$(toolbarId).remove().appendTo($(parent).find(table_toolbar)).show();
+
+							setTimeout(function() {
+
+								var diff = $(parent).find('.dataTableHeader').outerHeight()
+										+ $(tableId).find('.thead').outerHeight();
+								var parentPadding = parseFloat($(parent).css('padding-top')) * 2;
+								var rowHeight = $(tableId).find('tbody tr:first').outerHeight();
+								var available = $(parent).height() - diff - parentPadding;
+								var totRows = Math.floor(available / rowHeight);
+
+								b._iDisplayLength = (totRows > 1) ? (totRows - 1) : totRows;
+								a.fnDraw();
+
+							}, 500);
+
+						},
+						"bProcessing" : true,
+						"bAutoWidth" : false,
+						"aaSorting" : [ [ 1, "asc" ] ],
+						"bServerSide" : true,
+						"bJQueryUI" : true,
+						"bRetrieve" : true,
+						"sAjaxSource" : url,
+						"aoColumnDefs" : [ {
+							"bSearchable" : false,
+							"bVisible" : false,
+							"aTargets" : [ 0 ]
+						}, {
+							"sWidth" : "20%",
+							"aTargets" : [ 1 ]
+						} ]
+
+					});
+
+		})
+	})
+	
+	</script>
+	
+}

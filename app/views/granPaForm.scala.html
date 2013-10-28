@@ -1,0 +1,25 @@
+@(gpform: Form[models.GranPa])(implicit request: RequestHeader)
+
+@import helper._
+
+@helper.form(action = routes.GranpaController.submit) {
+    
+    <ul>
+    	<li>
+    		@helper.inputText(gpform("id"))
+    	</li>
+    	<li>
+    		@helper.inputText(gpform("name"))
+    	</li>
+    	<li>
+    		@helper.inputText(gpform("sons"))
+    	</li>
+    	<li>
+    		<label>remove element</label>
+    		<input type="checkbox" name="remove" />
+    	</li>
+    
+    </ul>
+    
+    <input type="submit" />
+}

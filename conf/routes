@@ -1,0 +1,16 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+#GranPa
+GET	/granpa						 controllers.GranpaController.index
+GET    /granpa/table                                     controllers.GranpaController.table
+GET    /granpa/new                                       controllers.GranpaController.create
+GET    /granpa/edit/:id                                  controllers.GranpaController.edit(id: String)
+POST   /granpa/submit                                    controllers.GranpaController.submit
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
