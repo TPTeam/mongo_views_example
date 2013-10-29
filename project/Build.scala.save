@@ -13,8 +13,9 @@ object ApplicationBuild extends Build {
 
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
-		  
-            resolvers += Resolver.url("TPTeam Repository", url("http://tpteam.github.io/snapshots/"))(Resolver.ivyStylePatterns)
+
+    resolvers += "Local Play Repository" at "play/repository/local/"
+
   )
 
 }
