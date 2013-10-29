@@ -3,6 +3,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 import models._
+import RefObj._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.concurrent.Akka
@@ -39,34 +40,34 @@ object SonController extends Controller with TablePager[Son] with CRUDer[Son] {
       mapping(
         "id" -> text,
         "name" -> nonEmptyText,
-        "sons" -> text.verifyOptJson
-       ){(id, name, _sons) =>
+        "fa" -> text
+       ){(id, name, _fa) =>
           {
-            val sons: List[Reference[Son]] = List()
+            val father = tryo{makeReference[Father](Father.findOneByIdString(_fa).get)}
             				
             (tryo(new ObjectId(id))) match {
               case Some(oid) => 			//UPDATE
                 	  Son.update(oid,
             		      Son(
             		          id = oid,
-            		          name = name
-            		          //sons = sons
+            		          name = name,
+            		          fa = father
             		      )
             		   )
             		   Son.findOneById(oid).get
               case _ =>						//CREATE
             		  Son.create(
             		      Son(
-            		          name = name
-            		          //sons = sons
+            		          name = name,
+            		          fa = father
             		          )
             		      )
             }
           }
-      }{gp => {
-        Some(gp.id.toStringMongod(), 
-    		 gp.name,
-    		 ""//Json.stringify("")
+      }{s => {
+        Some(s.id.toStringMongod(), 
+    		 s.name,
+    		 s.fa.map(x => x.id.toStringMongod()).getOrElse("")
     		)
       }
       }

@@ -45,7 +45,13 @@ object FatherController extends Controller with TablePager[Father] with CRUDer[F
        ){(id, name,gp, _sons) =>
           {
             val granpa = tryo{makeReference[GranPa](GranPa.findOneByIdString(gp).get)}
-            val sons: List[Reference[Son]] = List()
+            val sons: List[Reference[Son]] = 
+              tryo{Json.parse(_sons)} match {
+                case Some(s : JsArray) =>
+                  s.value.seq.map(v =>
+                    tryo{makeReference[Son](Son.findOneByIdString(v.as[String]).get)}).toList.flatten
+                case _ => List()
+              }
             				
             (tryo(new ObjectId(id))) match {
               case Some(oid) => 			//UPDATE
@@ -72,7 +78,7 @@ object FatherController extends Controller with TablePager[Father] with CRUDer[F
         Some(f.id.toStringMongod(), 
     		 f.name,
     		 f.gp.map(x => x.id.toStringMongod()).getOrElse(""),
-    		 ""//Json.stringify("")
+    		 Json.stringify(Json.toJson(f.sons.map(s => s.id.toStringMongod)))
     		)
       }
       }
