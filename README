@@ -7,23 +7,12 @@ Example project for mongo views plugin
 	$ git clone git@github.com:TPTeam/mongo_views_plugin.git
 
 
-3. configure Build.scala in order to find mongo views plugin
-	
-	$ nano {your_project_folder}/project/Build.scala
-	
-	Add the following line
-
- 	val main = play.Project(appName, appVersion, appDependencies).settings(
- 		line resolvers += "Local Play Repository" at "{your_play_home}/repository/local/"
- 	)
-
-
-4. compile
+3. compile
 	{your_project_folder} $ play
 	[mongo-views-example] $ clean
 	[mongo-views-example] $ compile
 	[mongo-views-example] $ run
 
-5. open your browser to localhost:9000
+4. open your browser to localhost:9000
 
-6. enjoy!
+5. enjoy!
