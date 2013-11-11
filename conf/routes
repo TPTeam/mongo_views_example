@@ -7,10 +7,11 @@ GET     /                           controllers.Application.index
 
 #GranPa
 GET	/granpa						 controllers.GranpaController.index
+->    /granpa					 controllers.GranpaController
 GET    /granpa/table                                     controllers.GranpaController.table
-GET    /granpa/new                                       controllers.GranpaController.create
-GET    /granpa/edit/:id                                  controllers.GranpaController.edit(id: String)
-POST   /granpa/submit                                    controllers.GranpaController.submit
+#GET    /granpa/new                                       controllers.GranpaController.create
+#GET    /granpa/edit/:id                                  controllers.GranpaController.edit(id: String)
+#POST   /granpa/submit                                    controllers.GranpaController.submit
 
 #Father
 GET	/father						 controllers.FatherController.index

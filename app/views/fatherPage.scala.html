@@ -1,4 +1,4 @@
-@()
+@()(implicit paths: controllers.CRUDerPaths)
 
 @main("Father - Page") {
 	<div class="centered">
@@ -17,7 +17,7 @@
 	<div>
 		 <ul>
 	    	<li>
-				<a href="/father/new">
+				<a href="@paths.create">
 					<h3>Create New</h3>
 				</a>
 			</li>

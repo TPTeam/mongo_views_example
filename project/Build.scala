@@ -8,13 +8,17 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    "mongo-views-plugin" % "mongo-views-plugin_2.10" % "1.0-SNAPSHOT"
+    "mongo-views-plugin" % "mongo-views-plugin_2.10" % "0.5"
   )
 
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
 		  
-            resolvers += Resolver.url("TPTeam Repository", url("http://tpteam.github.io/snapshots/"))(Resolver.ivyStylePatterns)
+		  
+      resolvers += Resolver.url("TPTeam Repository", url(
+          "http://tpteam.github.io/snapshots/"
+          //"file://..../play-2.2.1/repository/local"
+      ))(Resolver.ivyStylePatterns)
   )
 
 }

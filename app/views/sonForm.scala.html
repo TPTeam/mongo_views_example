@@ -1,8 +1,8 @@
-@(gpform: Form[models.Son])(implicit request: RequestHeader)
+@(gpform: Form[models.Son])(implicit request: RequestHeader, paths: controllers.CRUDerPaths)
 
 @import helper._
 
-@helper.form(action = routes.SonController.submit) {
+@helper.form(action = new play.api.mvc.Call("POST",paths.submit)) {
 	
      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
      <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
