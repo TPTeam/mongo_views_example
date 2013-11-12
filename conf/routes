@@ -3,29 +3,31 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET    /               controllers.Application.index
 
 #GranPa
-GET	/granpa						 controllers.GranpaController.index
-->    /granpa					 controllers.GranpaController
-GET    /granpa/table                                     controllers.GranpaController.table
+GET    /granpa         controllers.GranpaController.index
+->     /granpa         controllers.GranpaController
+GET    /granpa/table   controllers.GranpaController.table
 #GET    /granpa/new                                       controllers.GranpaController.create
 #GET    /granpa/edit/:id                                  controllers.GranpaController.edit(id: String)
 #POST   /granpa/submit                                    controllers.GranpaController.submit
 
 #Father
-GET	/father						 controllers.FatherController.index
-GET    /father/table                                     controllers.FatherController.table
-GET    /father/new                                       controllers.FatherController.create
-GET    /father/edit/:id                                  controllers.FatherController.edit(id: String)
-POST   /father/submit                                    controllers.FatherController.submit
+GET    /father         controllers.FatherController.index
+->     /father         controllers.FatherController
+GET    /father/table   controllers.FatherController.table
+#GET    /father/new                                       controllers.FatherController.create
+#GET    /father/edit/:id                                  controllers.FatherController.edit(id: String)
+#POST   /father/submit                                    controllers.FatherController.submit
 
 #Son
-GET	/son						 controllers.SonController.index
-GET    /son/table                                     controllers.SonController.table
-GET    /son/new                                       controllers.SonController.create
-GET    /son/edit/:id                                  controllers.SonController.edit(id: String)
-POST   /son/submit                                    controllers.SonController.submit
+GET    /son         controllers.SonController.index
+->     /son         controllers.SonController
+GET    /son/table   controllers.SonController.table
+#GET    /son/new        controllers.SonController.create
+#GET    /son/edit/:id   controllers.SonController.edit(id: String)
+#POST   /son/submit     controllers.SonController.submit
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET    /assets/*file   controllers.Assets.at(path="/public", file)
